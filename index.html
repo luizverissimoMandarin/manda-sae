@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mandarin Prints</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="shortcut icon" href="./src/img/favicon.ico" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="./src/img/LOGO_MANDARIN_COR.png" alt="" />
+      </div>
+    </header>
+
+    <section class="archive">
+      <div class="text">
+        <h1>Faça o upload do arquivo para gerar a imagem do SAE.</h1>
+      </div>
+
+      <form action="data">
+          <h1 class="text">Coloque o numero de colunas desejadas:</h1>
+          <input class="colunas" type="number">
+      </form>
+
+      <form id="dropFileForm">
+        <input
+          type="file"
+          name="files[]"
+          id="fileInput"
+          multiple
+          onchange="addFiles(event)"
+        />
+
+        <label
+          for="fileInput"
+          id="fileLabel"
+          ondragover="overrideDefault(event);fileHover();"
+          ondragenter="overrideDefault(event);fileHover();"
+          ondragleave="overrideDefault(event);fileHoverEnd();"
+          ondrop="overrideDefault(event);fileHoverEnd();
+                  addFiles(event);"
+        >
+          <i class="fa fa-download fa-5x"></i>
+          <br />
+          <span id="fileLabelText"> Escolha ou arraste seu arquivo </span>
+          <br />
+          <span id="uploadStatus"></span>
+          <div class="spinner-container">
+            <img src="./src/img/spinner.svg" />
+          </div>
+        </label>
+
+        <input type="submit" value="Upload" class="uploadButton" />
+      </form>
+
+      <div>
+        <a href="https://localhost:3333/manda-sae-email" id="baixar">
+          <button class="download">Baixar Prints</button>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Copyright ® Mandarin – Esta ferramenta é apenas para uso interno.</p>
+    </footer>
+
+    <script src="./src/javascript/index.js"></script>
+    <script src="./src/javascript/download.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>
