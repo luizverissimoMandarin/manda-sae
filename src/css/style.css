@@ -59,6 +59,7 @@
   
   .text {
     color: #fff;
+    padding-top: 20px ;
     padding-bottom: 20px ;
   }
 
@@ -72,8 +73,16 @@
     border-radius: 8px;
 }
 
+.options {
+  width: 400px;
+  height: 40px;
+  font-size: 22px; 
+  font-family: "graviola-bold";
+  border-radius: 8px;
+  text-align-last: center
+}
 
-  
+
   @media only screen and (max-width: 991px) {
     .logo img {
       height: 80%;

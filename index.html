@@ -19,11 +19,17 @@
         <h1>Faça o upload do arquivo para gerar a imagem do SAE.</h1>
       </div>
 
+      <h1 class="text">Coloque o tipo de job desejado:</h1>
+      <select class="options">       
+        <option value="IVA">IVA</option>
+        <option value="E-mail">E-mail</option>
+     </select>
+
       <form action="data">
           <h1 class="text">Coloque o numero de colunas desejadas:</h1>
-          <input class="colunas" type="number">
+          <input class="colunas" type="number" value="2">
       </form>
-
+      
       <form id="dropFileForm">
         <input
           type="file"
