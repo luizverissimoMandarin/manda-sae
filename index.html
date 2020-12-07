@@ -27,7 +27,7 @@
 
       <form action="data">
           <h1 class="text">Coloque o numero de colunas desejadas:</h1>
-          <input class="colunas" type="number" value="2">
+          <input class="colunas" type="number" min="1" max="10" value="2">
       </form>
       
       <form id="dropFileForm">
@@ -62,7 +62,7 @@
       </form>
 
       <div>
-        <a href="https://localhost:3333/manda-sae-email" id="baixar">
+        <a href="http://localhost:3333/get-sae" id="baixar">
           <button class="download">Baixar Prints</button>
         </a>
       </div>

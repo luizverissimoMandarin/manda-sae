@@ -5,12 +5,27 @@ const fileInput = document.getElementById('fileInput');
 const uploadButton = document.querySelector('.uploadButton');
 const spinnerContainer = document.querySelector('.spinner-container')
 const download =  document.querySelector('.download')
+const selectOptions = document.querySelector('.options')
+const columns = document.querySelector('.colunas')
 
 download.addEventListener('click', onClickDownload)
 uploadButton.addEventListener('click', event => uploadFiles(event) )
 
-
 let droppedFiles;
+let droppedFilesArr
+let columnsSelected = 2
+let selectedSaeOption = 'IVA'
+
+columns.addEventListener('change', (event) => {
+  columnsSelected = event.target.value
+})
+
+selectOptions.addEventListener('change', (event) => {
+  selectedSaeOption = event.target.value
+  if(event.target.value === 'E-mail') {
+    // columns.disable = true desabilitar o input de colunas
+  }
+})
 
 function onClickDownload() {
   download.style.display = 'none'
@@ -35,11 +50,7 @@ function fileHoverEnd() {
 
 function addFiles(event) {
   droppedFiles = event.target.files || event.dataTransfer.files;
-  if(droppedFiles.length > 1) {
-    alert('Adicione somente um arquivo .zip por vez')
-    droppedFiles = undefined
-    return
-  }
+  droppedFilesArr = Array.from(droppedFiles)
 
   changeStatus("");
   uploadButton.style.backgroundColor = '#F24405'
@@ -62,16 +73,32 @@ async function uploadFiles(event) {
   event.preventDefault();
   spinnerContainer.style.display = 'unset'
 
-  var formData = new FormData();
-
+  let formData = new FormData();
   for (var i = 0, file; (file = droppedFiles[i]); i++) {
     formData.append(fileInput.name, file, file.name);
   }
 
-  let reqFormData = new FormData();
-  reqFormData.append('zip', droppedFiles[0]);
+  console.log(droppedFiles)
 
-  axios.post('https://localhost:3333/manda-sae-email', reqFormData).then( () => {
+  let reqFormData = new FormData();
+  // for(let i; i < droppedFiles.length; i++) {
+  //   reqFormData.append('images', droppedFiles[i]);
+  // }
+  droppedFilesArr.map(file => {
+    reqFormData.append('images', file)
+  })
+
+  let requestUrl
+  if (selectedSaeOption === 'IVA') {
+    requestUrl = 'http://localhost:3333/sae'
+    reqFormData.append('columns', columnsSelected);
+  } 
+
+  if (selectedSaeOption === 'E-mail') requestUrl = 'http://localhost:3333/sae-email'
+  console.log(requestUrl)
+  console.log(reqFormData)
+
+  axios.post(requestUrl, reqFormData).then( () => {
     download.style.display = 'unset'
     spinnerContainer.style.display = 'none'
     uploadButton.style.backgroundColor = '#f3926f'
