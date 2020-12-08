@@ -14,7 +14,7 @@ uploadButton.addEventListener('click', event => uploadFiles(event) )
 let droppedFiles;
 let droppedFilesArr
 let columnsSelected = 2
-let selectedSaeOption = 'IVA'
+let selectedSaeOption = 'Multi'
 
 columns.addEventListener('change', (event) => {
   columnsSelected = event.target.value
@@ -23,7 +23,11 @@ columns.addEventListener('change', (event) => {
 selectOptions.addEventListener('change', (event) => {
   selectedSaeOption = event.target.value
   if(event.target.value === 'E-mail') {
-    // columns.disable = true desabilitar o input de colunas
+    columns.setAttribute('disabled', '')
+  }
+
+  if(event.target.value === 'Multi') {
+    columns.removeAttribute('disabled')
   }
 })
 
@@ -89,12 +93,12 @@ async function uploadFiles(event) {
   })
 
   let requestUrl
-  if (selectedSaeOption === 'IVA') {
-    requestUrl = 'http://localhost:3333/sae'
+  if (selectedSaeOption === 'Multi') {
+    requestUrl = 'https://manda-sae.glitch.me/sae'
     reqFormData.append('columns', columnsSelected);
   } 
 
-  if (selectedSaeOption === 'E-mail') requestUrl = 'http://localhost:3333/sae-email'
+  if (selectedSaeOption === 'E-mail') requestUrl = 'https://manda-sae.glitch.me/sae-email'
   console.log(requestUrl)
   console.log(reqFormData)
 
